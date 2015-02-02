@@ -1,0 +1,32 @@
+{
+  "name": "ng-xslt",
+  "version": "0.0.1",
+  "description": "Angular filter that transforms XML using provided XSLT",
+  "main": "ng-xslt.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/v12/angular-xslt.git"
+  },
+  "keywords": [
+    "xslt",
+    "xsl",
+    "xml"
+  ],
+  "author": {
+    "name": "v12",
+    "email": "dr.evil@krtn.eu"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/v12/angular-xslt/issues"
+  },
+  "homepage": "https://github.com/v12/angular-xslt",
+  "devDependencies": {
+    "del": "^1.1.1",
+    "gulp": "^3.8.10",
+    "gulp-uglify": "^1.1.0"
+  }
+}
