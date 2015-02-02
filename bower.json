@@ -1,7 +1,7 @@
 {
   "name": "angular-xslt",
   "main": "ng-xslt.js",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Angular filter that transforms XML using provided XSLT",
   "keywords": [
     "xslt",
@@ -26,5 +26,8 @@
     "bower_components",
     "test",
     "tests"
-  ]
+  ],
+  "dependencies": {
+    "angular": "^1.2.x"
+  }
 }
