@@ -49,12 +49,12 @@
             xmlDoc = new ActiveXObject('Msxml2.DOMDocument');
             xmlDoc.loadXML(xml);
             if (xmlDoc.parseError.errorCode !== 0)
-                return ('Invalid XML (' + xmlDoc.parseError.errorCode + '): ' + xmlDoc.parseError.reason).trim();
+                return ('XML parse error (' + xmlDoc.parseError.errorCode + '): ' + xmlDoc.parseError.reason).trim();
 
             xsltDoc = new ActiveXObject('Msxml2.FreeThreadedDOMDocument');
             xsltDoc.loadXML(xslt);
             if (xsltDoc.parseError.errorCode !== 0)
-                return ('Invalid XSLT (' + xsltDoc.parseError.errorCode + '): ' + xsltDoc.parseError.reason).trim();
+                return ('XSLT parse error (' + xsltDoc.parseError.errorCode + '): ' + xsltDoc.parseError.reason).trim();
 
             var template = new ActiveXObject('Msxml2.XSLTemplate');
             template.stylesheet = xsltDoc;
@@ -69,11 +69,11 @@
 
             xmlDoc = (new DOMParser()).parseFromString(xml, 'text/xml');
             if (err = getParserError(xmlDoc))
-                return 'Invalid XML: ' + err;
+                return 'XML parse error: ' + err;
 
             xsltDoc = (new DOMParser()).parseFromString(xslt, 'text/xml');
             if (err = getParserError(xsltDoc))
-                return 'Invalid XSLT: ' + err;
+                return 'XSLT parse error: ' + err;
 
             processor = new XSLTProcessor();
             processor.importStylesheet(xsltDoc);
