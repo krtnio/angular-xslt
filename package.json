@@ -4,7 +4,8 @@
   "description": "Angular filter that transforms XML using provided XSLT",
   "main": "ng-xslt.js",
   "scripts": {
-    "test": "karma start --single-run"
+    "prepublish": "gulp test && gulp build",
+    "test": "gulp test"
   },
   "repository": {
     "type": "git",
