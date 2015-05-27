@@ -1,7 +1,7 @@
 {
   "name": "angular-xslt",
   "main": "./src/ng-xslt.js",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "description": "Angular filter that transforms XML using provided XSLT",
   "keywords": [
     "xslt",
