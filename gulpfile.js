@@ -20,6 +20,6 @@ gulp.task('test', function (done) {
     }, done);
 });
 
-gulp.task('build', ['minify']);
+gulp.task('build', ['clean', 'minify']);
 
-gulp.task('default', ['clean', 'test', 'build']);
+gulp.task('default', ['build']);
