@@ -2,7 +2,7 @@
   "name": "ng-xslt",
   "version": "0.0.1",
   "description": "Angular filter that transforms XML using provided XSLT",
-  "main": "ng-xslt.js",
+  "main": "./dist/ng-xslt.js",
   "scripts": {
     "prepublish": "gulp test && gulp build",
     "test": "gulp test"
