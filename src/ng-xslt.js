@@ -9,7 +9,7 @@ angular.module('ngXslt', [])
              * @type boolean
              */
             function browserSupportsXSLT () {
-                if ($document.recalc) // IE 5+
+                if ('ActiveXObject' in $window)
                     return true;
                 else if (angular.isDefined($window.XMLHttpRequest) && angular.isDefined($window.XSLTProcessor)) { // Mozilla 0.9.4+, Opera 9+
                     if (typeof (new XSLTProcessor()).transformDocument === 'function')
@@ -30,6 +30,17 @@ angular.module('ngXslt', [])
                 xml = (new DOMParser()).parseFromString(xml, 'text/xml');
                 if(xml.getElementsByTagName('parsererror')[0])
                     return 'Invalid XML';
+
+                if ('ActiveXObject' in $window) {
+                    var trans = new ActiveXObject("Msxml2.XSLTemplate"),
+                        xslDoc = new ActiveXObject("Msxml2.FreeThreadedDOMDocument");
+                    xslDoc.loadXML(xslt);
+                    trans.stylesheet = xslDoc;
+                    var proc = trans.createProcessor()
+                    proc.input = xml;
+                    proc.transform();
+                    return proc.output;
+                }
 
                 xslt = (new DOMParser()).parseFromString(xslt, 'text/xml');
 
