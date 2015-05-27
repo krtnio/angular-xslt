@@ -57,7 +57,11 @@
                 return ('XSLT parse error (' + xsltDoc.parseError.errorCode + '): ' + xsltDoc.parseError.reason).trim();
 
             var template = new ActiveXObject('Msxml2.XSLTemplate');
-            template.stylesheet = xsltDoc;
+            try {
+                template.stylesheet = xsltDoc;
+            } catch (err) {
+                return 'XSLT error: ' + err.message;
+            }
 
             processor = template.createProcessor();
             processor.input = xmlDoc;
