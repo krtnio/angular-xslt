@@ -3,30 +3,62 @@
 <head lang="en">
     <meta charset="UTF-8">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"/>
+    <style>
+        span.nobr { white-space: nowrap; }
+
+        .indent { text-indent: 1.2em; }
+    </style>
     <title>ng-xslt</title>
 </head>
 <body>
+<a href="https://github.com/krtnio/angular-xslt">
+    <img style="position: absolute; top: 0; right: 0; border: 0;"
+         src="https://camo.githubusercontent.com/a6677b08c955af8400f44c6298f40e7d19cc5b2d/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677261795f3664366436642e706e67"
+         alt="Fork me on GitHub"
+         data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png">
+</a>
 
 <div class="container">
-    <h1>ng-xslt example</h1>
+    <div class="page-header">
+        <h1>
+            <strong>Angular XSLT</strong> module
+            <span class="nobr">
+            <img src="https://img.shields.io/npm/v/angular-xslt.svg" alt="npm version"/>
+            <img src="https://img.shields.io/bower/v/angular-xslt.svg" alt="bower version"/>
+            </span>
+        </h1>
+    </div>
 
-    <div ng-controller="TestController">
-        <div>
+    <p class="lead">This example shows an example usage of <code>angular-xslt</code> module</p>
+
+    <p>It takes input XML, applies XSL template using <code>xslt</code> filter and outputs <a href="#result">result</a>
+        of transformation</p>
+
+
+    <h2>Live demo</h2>
+
+    <p class="indent">
+        <small>
+            You can modify both XML and XSLT, and filter will be instantly applied thanks to Angular data binding
+        </small>
+    </p>
+
+    <div ng-controller="ExampleController">
+        <div class="row">
             <div class="col-md-6">
-                <h4>XML
-                    <small ng-hide="xml !== null">loading {{filename}}.xslt...</small>
-                </h4>
-                <textarea class="form-control" rows="10" ng-model="xml"></textarea>
+                <h4>XML</h4>
+                <label for="xml" class="sr-only">XML</label>
+                <textarea id="xml" class="form-control" rows="10" ng-model="xml"></textarea>
             </div>
             <div class="col-md-6">
-                <h4>XSLT
-                    <small ng-hide="xslt !== null">loading {{filename}}.xslt...</small>
-                </h4>
-                <textarea class="form-control" rows="10" ng-model="xslt"></textarea>
+                <h4>XSLT</h4>
+                <label for="xslt" class="sr-only">XSLT</label>
+                <textarea id="xslt" class="form-control" rows="10" ng-model="xslt"></textarea>
             </div>
         </div>
-        <div>
-            <div class="col-md-12">
+        <hr/>
+        <div class="row" id="result">
+            <div class="col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3">
                 <h4>Result</h4>
                 <pre>{{ xml | xslt:xslt }}</pre>
             </div>
@@ -34,25 +66,16 @@
     </div>
 </div>
 
-<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
-<script src="dist/ng-xslt.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular.min.js"></script>
+<script src="./ng-xslt.js"></script>
 <script>
     angular.module('app', ['ngXslt'])
-            .controller('TestController', [
-                '$scope', '$http',
-                function ($scope, $http) {
-                    $scope.xml = null;
-                    $scope.xslt = null;
-
-                    angular.forEach(['xml', 'xslt'], function (ext) {
-                        $http.get('xml/source.' + ext)
-                                .success(function (response) {
-                                    $scope[ext] = response;
-                                })
-                                .error(function (err) {
-                                    console.error('Unable to load ' + ext, err);
-                                });
-                    });
+            .controller('ExampleController', [
+                '$scope',
+                function ($scope) {
+                    $scope.xml = '<Test>\n\t<SomeNumber>000123</SomeNumber>\n</Test>';
+                    $scope.xslt =
+                            '<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">\n\t<xsl:output method="xml" encoding="utf-8" />\n\t<xsl:template match="/">\n\t\t<Query>\n\t\t\t<Key>\n\t\t\t\t<SomeNumber>\n\t\t\t\t\t<xsl:value-of select="//SomeNumber" />\n\t\t\t\t</SomeNumber>\n\t\t\t</Key>\n\t\t\t<Option>\n\t\t\t\t<IncludeSomething>Y</IncludeSomething>\n\t\t\t\t<AnotherItem>N</AnotherItem>\n\t\t\t\t<JustForDemo>N</JustForDemo>\n\t\t\t\t<XslStylesheet />\n\t\t\t</Option>\n\t\t</Query>\n\t</xsl:template>\n</xsl:stylesheet>';
                 }
             ]);
 </script>
