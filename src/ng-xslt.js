@@ -1,4 +1,14 @@
-(function () {
+(function (factory) {
+    if (typeof define === 'function' && define.amd) {
+        return define(['angular'], function (angular) {
+            return factory(angular);
+        });
+    } else if (typeof exports === 'object') {
+        return module.exports = factory(require('angular')).name;
+    } else {
+        return factory(angular);
+    }
+})(function (angular) {
     /**
      * Returns whether the browser supports XSLT.
      *
@@ -88,10 +98,10 @@
         return output || '(empty)';
     }
 
-    angular.module('ngXslt', [])
+    return angular.module('ngXslt', [])
         .filter('xslt', [
             '$window', '$document',
             function ($window, $document) {
                 return transformXml.bind(this, $window, $document[0]);
             }]);
-})();
+});
