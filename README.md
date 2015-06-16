@@ -1,5 +1,6 @@
 # [angular-xslt][project-page]
-[![npm]][npm]![Bower][bower-shield][![devDependency Status][david-dev-shield]][david]
+[![npm][npm-shield]][npm] ![Bower][bower-shield] [![devDependency Status][david-dev-shield]][david]
+
 Angular filter that transforms XML using provided XSLT
 
 ## Installation
