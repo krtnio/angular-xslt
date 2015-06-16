@@ -1,6 +1,6 @@
 {
   "name": "angular-xslt",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Angular filter that transforms XML using provided XSLT",
   "main": "./dist/ng-xslt.js",
   "scripts": {
